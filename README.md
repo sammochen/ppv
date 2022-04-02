@@ -1,3 +1,3 @@
-# plus-plus-vocabulary
+# ppv: plus plus vocabulary
 
-Prophecy: Soon there will be something fun and helpful poppin here :)
+Learning vocabulary, but social
