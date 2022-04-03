@@ -1,15 +1,12 @@
 import CloseIcon from '@mui/icons-material/Close';
 import DoneIcon from '@mui/icons-material/Done';
 import StarIcon from '@mui/icons-material/Star';
-import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import {
-  Box,
   Button,
   Dialog,
   DialogContent,
   DialogTitle,
   Grid,
-  IconButton,
   TextField,
   Typography,
 } from '@mui/material';
@@ -44,46 +41,35 @@ export const NewWordModal = ({modalOpen, onClose}: NewWordModalProps) => {
       fullWidth={true}
     >
       <DialogTitle>
-        <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
-          <Typography component={'span'} variant={'h6'}>
-            New Word
-          </Typography>
-
-          {/* Favourite icon */}
-          <IconButton onClick={handleFavouriteButton}>
-            {isFavourite ? <StarIcon /> : <StarOutlineIcon />}
-          </IconButton>
-        </Box>
+        <Typography component={'span'} variant={'h6'}>
+          New Word
+        </Typography>
       </DialogTitle>
       <DialogContent>
         {/* Input components */}
-        <Grid container direction={'column'} spacing={3}>
+        <Grid container direction={'column'} spacing={2}>
           <Grid item>
-            <Typography>Word</Typography>
             <TextField
               fullWidth
-              variant="standard"
+              variant="outlined"
               placeholder="Enter your word here"
             />
           </Grid>
-          <Grid item>
-            <Typography>Comments</Typography>
-            <TextField fullWidth multiline rows={4} placeholder="Optional" />
-          </Grid>
 
           {/* The OK (tick) and Cancel (cross) buttons */}
-          <Grid container item spacing={0.5} justifyContent={'end'}>
+          <Grid container item spacing={1} justifyContent={'end'}>
+            <Grid item>
+              <Button variant="outlined" onClick={handleTickButtonClick}>
+                <StarIcon />
+              </Button>
+            </Grid>
             <Grid item>
               <Button variant="outlined" onClick={handleTickButtonClick}>
                 <DoneIcon />
               </Button>
             </Grid>
             <Grid item>
-              <Button
-                variant="outlined"
-                sx={{marginLeft: '0.5rem'}}
-                onClick={handleCrossButtonClick}
-              >
+              <Button variant="outlined" onClick={handleCrossButtonClick}>
                 <CloseIcon />
               </Button>
             </Grid>
