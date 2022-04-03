@@ -1,55 +1,16 @@
 import {AppBar, Grid, Toolbar, Typography} from '@mui/material';
 import {Box} from '@mui/system';
 import React from 'react';
-import {NewWordModal} from './components/NewWordModal';
 import {WordPanel} from './components/WordPanel';
 import {backgroundColor, secondaryColor, textColor} from './theme/colors';
-import {WordItem} from './utils/types';
+import {stubWordList} from './utils/stub';
 
 // const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
 /* --------------------------- Temporary mock data -------------------------- */
 // Word list that is above the "new words" line
-const wordList: WordItem[] = [
-  {
-    word: 'extraneous',
-    author: 'Sam',
-    date: new Date('2/1/22'),
-  },
-  {
-    word: 'guile',
-    author: 'Anubhav',
-    date: new Date('2/1/22'),
-  },
-  {
-    word: 'wombat',
-    author: 'Sam',
-    date: new Date('2/1/22'),
-  },
-  {
-    word: 'fungible',
-    author: 'Sam',
-    date: new Date('2/1/22'),
-  },
-  {
-    word: 'azure',
-    author: 'Anubhav',
-    date: new Date('2/1/22'),
-  },
-  {
-    word: 'voracious',
-    author: 'Anubhav',
-    date: new Date('2/1/22'),
-  },
-];
 
 export const App = () => {
-  const [modalOpen, setModalOpen] = React.useState(false);
-
-  const handleModalClose = () => {
-    setModalOpen(false);
-  };
-
   return (
     <Box sx={{backgroundColor: backgroundColor.hex(), minHeight: '100vh'}}>
       {/* Top app bar */}
@@ -71,28 +32,22 @@ export const App = () => {
           <Grid
             container
             sx={{
-              width: '30rem',
+              width: '40rem',
               maxWidth: '80vw',
               padding: '1rem',
             }}
             spacing={1}
           >
-            {wordList.map(wordItem => {
+            {stubWordList.map(wordObj => {
               return (
                 <Grid item xs={12}>
-                  <WordPanel wordItem={wordItem} />
+                  <WordPanel wordObj={wordObj} />
                 </Grid>
               );
             })}
           </Grid>
         </Grid>
       </Grid>
-
-      {/* The modal that opens on adding a new word */}
-      <NewWordModal
-        modalOpen={modalOpen}
-        onClose={handleModalClose}
-      ></NewWordModal>
     </Box>
   );
 };

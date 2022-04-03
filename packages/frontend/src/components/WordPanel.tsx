@@ -1,14 +1,18 @@
 import {Grid, Paper, Typography} from '@mui/material';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import React from 'react';
 import {secondaryColor, textColor} from '../theme/colors';
-import {WordItem} from '../utils/types';
-
+import {WordObj} from '../utils/types';
 export type WordPanelProps = {
-  wordItem: WordItem;
+  wordObj: WordObj;
 };
-// Each panel represents each word
-export const WordPanel = ({wordItem}: WordPanelProps) => {
+
+dayjs.extend(relativeTime);
+export const WordPanel = ({wordObj}: WordPanelProps) => {
   const offset = '0.4rem';
+
+  const relativeDateString = dayjs().to(dayjs(wordObj.date));
 
   return (
     <Paper
@@ -16,19 +20,34 @@ export const WordPanel = ({wordItem}: WordPanelProps) => {
         position: 'relative',
         backgroundColor: secondaryColor.hex(),
       }}
-      elevation={1}
+      elevation={3}
     >
-      {/* Main word typography */}
+      {/* Main word  */}
       <Grid container sx={{padding: '1rem'}}>
-        <Grid item>
+        <Grid item sx={{maxWidth: '90%'}}>
           <Typography
             variant="h6"
             sx={{
+              fontSize: '1.5rem',
+              fontWeight: 550,
               color: textColor.hex(),
             }}
           >
-            {wordItem.word}
+            {wordObj.word}
           </Typography>
+
+          {wordObj.definitions.map((definition, index) => {
+            return (
+              <Typography
+                sx={{
+                  fontSize: '0.9rem',
+                  color: textColor.hex(),
+                }}
+              >
+                {'- ' + definition}
+              </Typography>
+            );
+          })}
         </Grid>
       </Grid>
 
@@ -38,28 +57,11 @@ export const WordPanel = ({wordItem}: WordPanelProps) => {
           fontSize: '0.7rem',
           position: 'absolute',
           right: offset,
-          bottom: offset,
-          color: textColor.hex(),
-        }}
-      >
-        {wordItem.author}
-      </Typography>
-
-      {/* Date - absolute positioned */}
-      <Typography
-        sx={{
-          fontSize: '0.7rem',
-          position: 'absolute',
-          right: offset,
           top: offset,
           color: textColor.hex(),
         }}
       >
-        {wordItem.date.toLocaleDateString('en-GB', {
-          day: '2-digit',
-          month: '2-digit',
-          year: '2-digit',
-        })}
+        {wordObj.author + ', ' + relativeDateString}
       </Typography>
     </Paper>
   );
