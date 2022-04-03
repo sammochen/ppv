@@ -2,7 +2,7 @@ import {Grid, Paper, Typography} from '@mui/material';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import React from 'react';
-import {secondaryColor, textColor} from '../theme/colors';
+import {secondaryColor, secondaryTextColor, textColor} from '../theme/colors';
 import {WordObj} from '../utils/types';
 export type WordPanelProps = {
   wordObj: WordObj;
@@ -10,8 +10,7 @@ export type WordPanelProps = {
 
 dayjs.extend(relativeTime);
 export const WordPanel = ({wordObj}: WordPanelProps) => {
-  const offset = '0.4rem';
-
+  const offset = '0.6rem';
   const relativeDateString = dayjs().to(dayjs(wordObj.date));
 
   return (
@@ -24,7 +23,7 @@ export const WordPanel = ({wordObj}: WordPanelProps) => {
     >
       {/* Main word  */}
       <Grid container sx={{padding: '1rem'}}>
-        <Grid item sx={{maxWidth: '90%'}}>
+        <Grid item>
           <Typography
             variant="h6"
             sx={{
@@ -36,7 +35,7 @@ export const WordPanel = ({wordObj}: WordPanelProps) => {
             {wordObj.word}
           </Typography>
 
-          {wordObj.definitions.map((definition, index) => {
+          {wordObj.definitions.map(definition => {
             return (
               <Typography
                 sx={{
@@ -54,11 +53,11 @@ export const WordPanel = ({wordObj}: WordPanelProps) => {
       {/* Author - absolute positioned */}
       <Typography
         sx={{
-          fontSize: '0.7rem',
+          fontSize: '0.8rem',
           position: 'absolute',
           right: offset,
           top: offset,
-          color: textColor.hex(),
+          color: secondaryTextColor.hex(),
         }}
       >
         {wordObj.author + ', ' + relativeDateString}
