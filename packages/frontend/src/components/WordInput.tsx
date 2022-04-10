@@ -1,11 +1,7 @@
 import {Grid, Paper, TextField, Typography} from '@mui/material';
 import {styled} from '@mui/material/styles';
 import React, {useState} from 'react';
-import {
-  popColor as secondaryColor,
-  secondaryColor as popColor,
-  textColor,
-} from '../theme/colors';
+import {secondaryColor, secondaryTextColor, textColor} from '../theme/colors';
 
 const titleFontSize = '1.5rem';
 const titleFontWeight = 550;
@@ -20,22 +16,22 @@ const StyledTextField = styled(TextField)({
     },
 
     '& fieldset': {
-      border: `1.5px solid ${secondaryColor.hex()}`,
+      border: `1.5px solid ${secondaryTextColor.hex()}`,
     },
 
     '&:hover fieldset': {
-      border: `1.5px solid ${secondaryColor.hex()}`,
+      border: `1.5px solid ${secondaryTextColor.hex()}`,
     },
 
     '&.Mui-focused fieldset': {
-      border: `2px solid ${secondaryColor.hex()}`,
+      border: `2px solid ${secondaryTextColor.hex()}`,
     },
   },
   '& .MuiInputLabel-root': {
-    color: secondaryColor.hex(),
+    color: secondaryTextColor.hex(),
 
     '&.Mui-focused': {
-      color: secondaryColor.hex(),
+      color: secondaryTextColor.hex(),
     },
   },
 });
@@ -57,7 +53,7 @@ export const WordInput = ({onSubmitWord}: WordInputProps) => {
     <Paper
       sx={{
         position: 'relative',
-        backgroundColor: popColor.hex(),
+        backgroundColor: secondaryColor.hex(),
       }}
       elevation={3}
     >
