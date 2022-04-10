@@ -1,6 +1,7 @@
 import {Grid, Paper, TextField, Typography} from '@mui/material';
 import {styled} from '@mui/material/styles';
 import React, {useState} from 'react';
+import {useWordEntry} from '../hooks/useWordEntry';
 import {secondaryColor, secondaryTextColor, textColor} from '../theme/colors';
 
 const titleFontSize = '1.5rem';
@@ -41,7 +42,7 @@ export type WordInputProps = {
 };
 export const WordInput = ({onSubmitWord}: WordInputProps) => {
   const [textValue, setTextValue] = useState('');
-  const wordObj = {word: 'hi', definitions: [], author: '', date: Date.now()};
+  const {wordObj} = useWordEntry({word: textValue});
 
   const handleTextFieldChange = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>

@@ -5,6 +5,8 @@ import {api} from './routes';
 
 const startExpress = () => {
   const app = express();
+  app.use(express.json());
+
   const PORT = 4000;
 
   app.use('/api', api);
