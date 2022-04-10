@@ -1,6 +1,7 @@
 import {AppBar, Grid, Toolbar, Typography} from '@mui/material';
 import {Box} from '@mui/system';
 import React from 'react';
+import {WordInput} from './components/WordInput';
 import {WordPanel} from './components/WordPanel';
 import {backgroundColor, secondaryColor, textColor} from './theme/colors';
 import {stubWordList} from './utils/stub';
@@ -38,9 +39,12 @@ export const App = () => {
             }}
             spacing={1}
           >
-            {stubWordList.map(wordObj => {
+            <Grid item xs={12}>
+              <WordInput onSubmitWord={(word: string) => {}} />
+            </Grid>
+            {stubWordList.map((wordObj, index) => {
               return (
-                <Grid item xs={12}>
+                <Grid item xs={12} key={index}>
                   <WordPanel wordObj={wordObj} />
                 </Grid>
               );

@@ -2,6 +2,12 @@ import {WordObj} from './types';
 
 export const stubWordList: WordObj[] = [
   {
+    word: 'temp',
+    author: 'Sam',
+    definitions: [],
+    date: new Date('2/1/22'),
+  },
+  {
     word: 'extraneous',
     author: 'Sam',
     definitions: [

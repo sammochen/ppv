@@ -4,12 +4,18 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import React from 'react';
 import {secondaryColor, secondaryTextColor, textColor} from '../theme/colors';
 import {WordObj} from '../utils/types';
+
+dayjs.extend(relativeTime);
+
 export type WordPanelProps = {
   wordObj: WordObj;
 };
 
-dayjs.extend(relativeTime);
 export const WordPanel = ({wordObj}: WordPanelProps) => {
+  const titleFontSize = '1.5rem';
+  const titleFontWeight = 550;
+  const definitionFontSize = '0.9rem';
+  const metaFontSize = '0.8rem';
   const offset = '0.6rem';
   const relativeDateString = dayjs().to(dayjs(wordObj.date));
 
@@ -27,19 +33,20 @@ export const WordPanel = ({wordObj}: WordPanelProps) => {
           <Typography
             variant="h6"
             sx={{
-              fontSize: '1.5rem',
-              fontWeight: 550,
+              fontSize: titleFontSize,
+              fontWeight: titleFontWeight,
               color: textColor.hex(),
             }}
           >
             {wordObj.word}
           </Typography>
 
-          {wordObj.definitions.map(definition => {
+          {wordObj.definitions.map((definition, index) => {
             return (
               <Typography
+                key={index}
                 sx={{
-                  fontSize: '0.9rem',
+                  fontSize: definitionFontSize,
                   color: textColor.hex(),
                 }}
               >
@@ -50,10 +57,10 @@ export const WordPanel = ({wordObj}: WordPanelProps) => {
         </Grid>
       </Grid>
 
-      {/* Author - absolute positioned */}
+      {/* Metadata - absolute positioned */}
       <Typography
         sx={{
-          fontSize: '0.8rem',
+          fontSize: metaFontSize,
           position: 'absolute',
           right: offset,
           top: offset,
