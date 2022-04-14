@@ -10,7 +10,12 @@ api.get('/define', async (req, res) => {
 
   if (typeof word == 'string') {
     const dictionary = new FreeDictionary();
-    res.send(await dictionary.getWordEntry(word));
+    const wordEntry = await dictionary.getWordEntry(word);
+    if (wordEntry === null) {
+      res.sendStatus(404);
+    } else {
+      res.send(wordEntry);
+    }
   } else {
     res.sendStatus(404);
   }

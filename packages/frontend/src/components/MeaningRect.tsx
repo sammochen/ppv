@@ -3,18 +3,13 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import React from 'react';
 import {secondaryTextColor, textColor} from '../theme/colors';
+import {definitionFontSize} from '../theme/sizes';
 import {WordMeaning} from '../utils/types';
 
 dayjs.extend(relativeTime);
 
-const titleFontSize = '1.5rem';
-const titleFontWeight = 550;
-const definitionFontSize = '0.9rem';
-const metaFontSize = '0.8rem';
-const offset = '0.6rem';
-
 const abbreviatePartOfSpeech = (partOfSpeech: string): string => {
-  const abbrs = ['n', 'adj', 'v', 'adv', 'pron', 'prep', 'conj'];
+  const abbrs = ['n', 'adj', 'v', 'adv', 'pron', 'prep', 'conj', 'interj'];
   const abbr = abbrs.find(s => {
     return partOfSpeech.startsWith(s);
   });

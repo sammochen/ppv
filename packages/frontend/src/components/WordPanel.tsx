@@ -1,18 +1,17 @@
 import {Grid, Paper, Typography} from '@mui/material';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import React from 'react';
 import {secondaryColor, secondaryTextColor, textColor} from '../theme/colors';
+import {
+  metaFontSize,
+  offset,
+  titleFontSize,
+  titleFontWeight,
+} from '../theme/sizes';
 import {AuthoredWordEntry} from '../utils/types';
 import {MeaningRect} from './MeaningRect';
 
 dayjs.extend(relativeTime);
-
-const titleFontSize = '1.5rem';
-const titleFontWeight = 550;
-const definitionFontSize = '0.9rem';
-const metaFontSize = '0.8rem';
-const offset = '0.6rem';
 
 export type WordPanelProps = {
   authoredWordEntry: AuthoredWordEntry;

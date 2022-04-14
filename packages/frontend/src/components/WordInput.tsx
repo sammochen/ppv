@@ -1,13 +1,23 @@
-import {Grid, Paper, TextField} from '@mui/material';
+import SaveIcon from '@mui/icons-material/Save';
+import {
+  Button,
+  CircularProgress,
+  Grid,
+  Paper,
+  TextField,
+  Typography,
+} from '@mui/material';
 import {styled} from '@mui/material/styles';
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {useWordEntry} from '../hooks/useWordEntry';
-import {secondaryColor, secondaryTextColor, textColor} from '../theme/colors';
+import {
+  backgroundColor,
+  secondaryColor,
+  secondaryTextColor,
+  textColor,
+} from '../theme/colors';
+import {titleFontSize, titleFontWeight} from '../theme/sizes';
 import {MeaningRect} from './MeaningRect';
-
-const titleFontSize = '1.5rem';
-const titleFontWeight = 550;
-const definitionFontSize = '0.9rem';
 
 const StyledTextField = styled(TextField)({
   '& .MuiOutlinedInput-root': {
@@ -38,12 +48,24 @@ const StyledTextField = styled(TextField)({
   },
 });
 
+const StyledButton = styled(Button)({
+  backgroundColor: backgroundColor.hex(),
+  '&:hover': {
+    backgroundColor: backgroundColor.hex(),
+  },
+});
+
 export type WordInputProps = {
   onSubmitWord: (word: string) => void;
 };
 export const WordInput = ({onSubmitWord}: WordInputProps) => {
   const [textValue, setTextValue] = useState('');
-  const {wordEntry} = useWordEntry({word: textValue});
+  const {loading, wordEntry} = useWordEntry({word: textValue});
+
+  const submit = () => {
+    // submit only works if the word is valid
+    if (wordEntry) onSubmitWord(textValue);
+  };
 
   const handleTextFieldChange = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -60,9 +82,9 @@ export const WordInput = ({onSubmitWord}: WordInputProps) => {
       }}
       elevation={3}
     >
-      {/* Main word  */}
-      <Grid container spacing={1}>
-        <Grid item xs={12}>
+      <Grid container spacing={1} justifyContent="center">
+        {/* Main word input  */}
+        <Grid item xs={10}>
           <StyledTextField
             InputLabelProps={{
               shrink: true,
@@ -73,21 +95,42 @@ export const WordInput = ({onSubmitWord}: WordInputProps) => {
             onChange={handleTextFieldChange}
             onKeyDown={e => {
               if (e.key === 'Enter') {
-                onSubmitWord(textValue);
+                submit();
               }
             }}
           ></StyledTextField>
         </Grid>
+        <Grid item xs={2}>
+          <StyledButton
+            variant="contained"
+            fullWidth
+            sx={{height: '100%'}}
+            disabled={loading === true || wordEntry === null}
+          >
+            <SaveIcon />
+          </StyledButton>
+        </Grid>
 
         {/* Meanings */}
-        {wordEntry &&
+        {loading ? (
+          <Grid item>
+            <CircularProgress
+              sx={{width: '100%', color: backgroundColor.hex()}}
+            />
+          </Grid>
+        ) : wordEntry ? (
           wordEntry.meanings.map((meaning, index) => {
             return (
               <Grid key={index} item xs={12}>
                 <MeaningRect meaning={meaning} index={index} />
               </Grid>
             );
-          })}
+          })
+        ) : textValue.length > 0 ? (
+          <Grid item>
+            <Typography> {`oops :(`}</Typography>
+          </Grid>
+        ) : null}
       </Grid>
     </Paper>
   );
