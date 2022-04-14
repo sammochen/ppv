@@ -4,6 +4,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import React from 'react';
 import {secondaryColor, secondaryTextColor, textColor} from '../theme/colors';
 import {AuthoredWordEntry} from '../utils/types';
+import {MeaningRect} from './MeaningRect';
 
 dayjs.extend(relativeTime);
 
@@ -16,7 +17,6 @@ const offset = '0.6rem';
 export type WordPanelProps = {
   authoredWordEntry: AuthoredWordEntry;
 };
-
 export const WordPanel = ({authoredWordEntry}: WordPanelProps) => {
   const {wordEntry} = authoredWordEntry;
   const relativeDateString = dayjs().to(dayjs(authoredWordEntry.date));
@@ -26,11 +26,12 @@ export const WordPanel = ({authoredWordEntry}: WordPanelProps) => {
       sx={{
         position: 'relative',
         backgroundColor: secondaryColor.hex(),
+        padding: '1rem',
       }}
       elevation={3}
     >
       {/* Main word  */}
-      <Grid container sx={{padding: '1rem'}}>
+      <Grid container spacing={1}>
         <Grid item>
           <Typography
             variant="h6"
@@ -42,35 +43,15 @@ export const WordPanel = ({authoredWordEntry}: WordPanelProps) => {
           >
             {wordEntry.word}
           </Typography>
-
-          {wordEntry.meanings.map((meaning, index) => {
-            return (
-              <>
-                <Typography
-                  key={index}
-                  sx={{
-                    fontSize: definitionFontSize,
-                    color: textColor.hex(),
-                  }}
-                >
-                  {(index + 1).toString() + '. ' + meaning.definition}
-                </Typography>
-                {meaning.example && (
-                  <Typography
-                    key={index}
-                    sx={{
-                      fontSize: definitionFontSize,
-                      fontStyle: 'italic',
-                      color: secondaryTextColor.hex(),
-                    }}
-                  >
-                    {' - ' + meaning.example}
-                  </Typography>
-                )}
-              </>
-            );
-          })}
         </Grid>
+
+        {wordEntry.meanings.map((meaning, index) => {
+          return (
+            <Grid item xs={12}>
+              <MeaningRect meaning={meaning} index={index} />
+            </Grid>
+          );
+        })}
       </Grid>
 
       {/* Metadata - absolute positioned */}
