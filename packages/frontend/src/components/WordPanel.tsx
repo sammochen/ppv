@@ -19,7 +19,6 @@ export type WordPanelProps = {
 
 export const WordPanel = ({authoredWordEntry}: WordPanelProps) => {
   const {wordEntry} = authoredWordEntry;
-
   const relativeDateString = dayjs().to(dayjs(authoredWordEntry.date));
 
   return (
@@ -46,15 +45,29 @@ export const WordPanel = ({authoredWordEntry}: WordPanelProps) => {
 
           {wordEntry.meanings.map((meaning, index) => {
             return (
-              <Typography
-                key={index}
-                sx={{
-                  fontSize: definitionFontSize,
-                  color: textColor.hex(),
-                }}
-              >
-                {'- ' + meaning.definition}
-              </Typography>
+              <>
+                <Typography
+                  key={index}
+                  sx={{
+                    fontSize: definitionFontSize,
+                    color: textColor.hex(),
+                  }}
+                >
+                  {(index + 1).toString() + '. ' + meaning.definition}
+                </Typography>
+                {meaning.example && (
+                  <Typography
+                    key={index}
+                    sx={{
+                      fontSize: definitionFontSize,
+                      fontStyle: 'italic',
+                      color: secondaryTextColor.hex(),
+                    }}
+                  >
+                    {' - ' + meaning.example}
+                  </Typography>
+                )}
+              </>
             );
           })}
         </Grid>
