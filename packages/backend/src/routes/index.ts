@@ -1,15 +1,17 @@
 import express from 'express';
-import {getWordEntry} from '../dictionary';
+import {FreeDictionary} from '../dictionary/free-dictionary';
 
 export const api = express();
 
 api.get('/define', async (req, res) => {
   const {query} = req;
-
   const {word} = query;
+  console.log(`📖 Defining: ${word}`);
+
   if (typeof word == 'string') {
-    res.send(await getWordEntry(word));
+    const dictionary = new FreeDictionary();
+    res.send(await dictionary.getWordEntry(word));
   } else {
-    res.sendStatus(400);
+    res.sendStatus(404);
   }
 });

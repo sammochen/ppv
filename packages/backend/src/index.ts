@@ -1,9 +1,8 @@
 import dotenv from 'dotenv';
 import express from 'express';
-import {getWordEntry} from './dictionary';
 import {api} from './routes';
 
-const startExpress = () => {
+const initExpress = () => {
   const app = express();
   app.use(express.json());
 
@@ -17,11 +16,10 @@ const startExpress = () => {
 };
 
 const main = () => {
+  // envs
   dotenv.config();
-
-  startExpress();
-
-  getWordEntry('banana');
+  // express
+  initExpress();
 };
 
 main();

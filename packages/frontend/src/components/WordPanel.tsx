@@ -3,21 +3,24 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import React from 'react';
 import {secondaryColor, secondaryTextColor, textColor} from '../theme/colors';
-import {WordObj} from '../utils/types';
+import {AuthoredWordEntry} from '../utils/types';
 
 dayjs.extend(relativeTime);
 
+const titleFontSize = '1.5rem';
+const titleFontWeight = 550;
+const definitionFontSize = '0.9rem';
+const metaFontSize = '0.8rem';
+const offset = '0.6rem';
+
 export type WordPanelProps = {
-  wordObj: WordObj;
+  authoredWordEntry: AuthoredWordEntry;
 };
 
-export const WordPanel = ({wordObj}: WordPanelProps) => {
-  const titleFontSize = '1.5rem';
-  const titleFontWeight = 550;
-  const definitionFontSize = '0.9rem';
-  const metaFontSize = '0.8rem';
-  const offset = '0.6rem';
-  const relativeDateString = dayjs().to(dayjs(wordObj.date));
+export const WordPanel = ({authoredWordEntry}: WordPanelProps) => {
+  const {wordEntry} = authoredWordEntry;
+
+  const relativeDateString = dayjs().to(dayjs(authoredWordEntry.date));
 
   return (
     <Paper
@@ -38,10 +41,10 @@ export const WordPanel = ({wordObj}: WordPanelProps) => {
               color: textColor.hex(),
             }}
           >
-            {wordObj.word}
+            {wordEntry.word}
           </Typography>
 
-          {wordObj.definitions.map((definition, index) => {
+          {wordEntry.meanings.map((meaning, index) => {
             return (
               <Typography
                 key={index}
@@ -50,7 +53,7 @@ export const WordPanel = ({wordObj}: WordPanelProps) => {
                   color: textColor.hex(),
                 }}
               >
-                {'- ' + definition}
+                {'- ' + meaning.definition}
               </Typography>
             );
           })}
@@ -67,7 +70,7 @@ export const WordPanel = ({wordObj}: WordPanelProps) => {
           color: secondaryTextColor.hex(),
         }}
       >
-        {wordObj.author + ', ' + relativeDateString}
+        {authoredWordEntry.author + ', ' + relativeDateString}
       </Typography>
     </Paper>
   );

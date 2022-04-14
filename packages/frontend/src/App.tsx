@@ -5,6 +5,7 @@ import {WordInput} from './components/WordInput';
 import {WordPanel} from './components/WordPanel';
 import {backgroundColor, secondaryColor, textColor} from './theme/colors';
 import {stubWordList} from './utils/stub';
+import {AuthoredWordEntry} from './utils/types';
 
 // const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
@@ -42,10 +43,10 @@ export const App = () => {
             <Grid item xs={12}>
               <WordInput onSubmitWord={(word: string) => {}} />
             </Grid>
-            {stubWordList.map((wordObj, index) => {
+            {stubWordList.map((authoredWordEntry: AuthoredWordEntry, index) => {
               return (
                 <Grid item xs={12} key={index}>
-                  <WordPanel wordObj={wordObj} />
+                  <WordPanel authoredWordEntry={authoredWordEntry} />
                 </Grid>
               );
             })}

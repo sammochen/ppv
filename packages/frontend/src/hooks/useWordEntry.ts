@@ -1,21 +1,24 @@
 import axios from 'axios';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
+import {WordEntry} from '../utils/types';
 
 type UseWordEntryProps = {
   word: string;
 };
 export const useWordEntry = ({word}: UseWordEntryProps) => {
-  const wordObj = {word: 'hi', definitions: [], author: '', date: Date.now()};
+  const [wordEntry, setWordEntry] = useState<WordEntry | null>(null);
+
   useEffect(() => {
     // Re-fetch every word.
     // TODO: invalidate old queries
     const fetchWordEntry = async () => {
       const response = await axios.get(`/api/define?word=${word}`);
-      console.log(response.data);
+
+      setWordEntry(response.data);
     };
 
     fetchWordEntry();
   }, [word]);
 
-  return {wordObj};
+  return {wordEntry};
 };

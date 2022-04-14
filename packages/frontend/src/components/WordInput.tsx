@@ -1,4 +1,4 @@
-import {Grid, Paper, TextField, Typography} from '@mui/material';
+import {Grid, Paper, TextField} from '@mui/material';
 import {styled} from '@mui/material/styles';
 import React, {useState} from 'react';
 import {useWordEntry} from '../hooks/useWordEntry';
@@ -42,7 +42,7 @@ export type WordInputProps = {
 };
 export const WordInput = ({onSubmitWord}: WordInputProps) => {
   const [textValue, setTextValue] = useState('');
-  const {wordObj} = useWordEntry({word: textValue});
+  const {wordEntry} = useWordEntry({word: textValue});
 
   const handleTextFieldChange = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -62,11 +62,6 @@ export const WordInput = ({onSubmitWord}: WordInputProps) => {
       <Grid container sx={{padding: '1rem'}}>
         <Grid item xs={12}>
           <StyledTextField
-            sx={{
-              fontSize: titleFontSize,
-              fontWeight: titleFontWeight,
-              color: textColor.hex(),
-            }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -74,23 +69,7 @@ export const WordInput = ({onSubmitWord}: WordInputProps) => {
             label={'Word'}
             value={textValue}
             onChange={handleTextFieldChange}
-          >
-            {wordObj.word}
-          </StyledTextField>
-
-          {wordObj.definitions.map((definition, index) => {
-            return (
-              <Typography
-                key={index}
-                sx={{
-                  fontSize: definitionFontSize,
-                  color: textColor.hex(),
-                }}
-              >
-                {'- ' + definition}
-              </Typography>
-            );
-          })}
+          ></StyledTextField>
         </Grid>
       </Grid>
     </Paper>
