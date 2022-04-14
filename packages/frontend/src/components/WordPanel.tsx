@@ -30,8 +30,8 @@ export const WordPanel = ({authoredWordEntry}: WordPanelProps) => {
       }}
       elevation={3}
     >
-      {/* Main word  */}
       <Grid container spacing={1}>
+        {/* Main word  */}
         <Grid item>
           <Typography
             variant="h6"
@@ -44,10 +44,10 @@ export const WordPanel = ({authoredWordEntry}: WordPanelProps) => {
             {wordEntry.word}
           </Typography>
         </Grid>
-
+        {/* Meanings */}
         {wordEntry.meanings.map((meaning, index) => {
           return (
-            <Grid item xs={12}>
+            <Grid key={index} item xs={12}>
               <MeaningRect meaning={meaning} index={index} />
             </Grid>
           );

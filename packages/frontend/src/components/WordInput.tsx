@@ -3,6 +3,7 @@ import {styled} from '@mui/material/styles';
 import React, {useState} from 'react';
 import {useWordEntry} from '../hooks/useWordEntry';
 import {secondaryColor, secondaryTextColor, textColor} from '../theme/colors';
+import {MeaningRect} from './MeaningRect';
 
 const titleFontSize = '1.5rem';
 const titleFontWeight = 550;
@@ -55,11 +56,12 @@ export const WordInput = ({onSubmitWord}: WordInputProps) => {
       sx={{
         position: 'relative',
         backgroundColor: secondaryColor.hex(),
+        padding: '1rem',
       }}
       elevation={3}
     >
       {/* Main word  */}
-      <Grid container sx={{padding: '1rem'}}>
+      <Grid container spacing={1}>
         <Grid item xs={12}>
           <StyledTextField
             InputLabelProps={{
@@ -69,8 +71,23 @@ export const WordInput = ({onSubmitWord}: WordInputProps) => {
             label={'Word'}
             value={textValue}
             onChange={handleTextFieldChange}
+            onKeyDown={e => {
+              if (e.key === 'Enter') {
+                onSubmitWord(textValue);
+              }
+            }}
           ></StyledTextField>
         </Grid>
+
+        {/* Meanings */}
+        {wordEntry &&
+          wordEntry.meanings.map((meaning, index) => {
+            return (
+              <Grid key={index} item xs={12}>
+                <MeaningRect meaning={meaning} index={index} />
+              </Grid>
+            );
+          })}
       </Grid>
     </Paper>
   );

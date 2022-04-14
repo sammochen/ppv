@@ -9,9 +9,6 @@ import {AuthoredWordEntry} from './utils/types';
 
 // const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
-/* --------------------------- Temporary mock data -------------------------- */
-// Word list that is above the "new words" line
-
 export const App = () => {
   return (
     <Box sx={{backgroundColor: backgroundColor.hex(), minHeight: '100vh'}}>
@@ -41,7 +38,11 @@ export const App = () => {
             spacing={1}
           >
             <Grid item xs={12}>
-              <WordInput onSubmitWord={(word: string) => {}} />
+              <WordInput
+                onSubmitWord={(word: string) => {
+                  console.log('please submit this word', word);
+                }}
+              />
             </Grid>
             {stubWordList.map((authoredWordEntry: AuthoredWordEntry, index) => {
               return (
