@@ -1,16 +1,16 @@
-export type WordMeaning = {
+export interface WordMeaning {
   partOfSpeech: string;
   definition: string;
   example?: string;
-};
+}
 
-export type WordEntry = {
+export interface WordEntry {
   word: string;
   meanings: WordMeaning[];
-};
+}
 
-export type AuthoredWordEntry = {
+export interface AuthoredWordEntry {
   wordEntry: WordEntry;
   author: string;
   date: Date;
-};
+}
