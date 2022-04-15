@@ -1,9 +1,9 @@
 import express from 'express';
 import {FreeDictionary} from '../dictionary/free-dictionary';
 
-export const api = express();
+export const dictionaryRouter = express();
 
-api.get('/define', async (req, res) => {
+dictionaryRouter.get('/define', async (req, res) => {
   const {query} = req;
   const {word} = query;
   console.log(`📖 Defining: ${word}`);

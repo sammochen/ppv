@@ -24,7 +24,7 @@ export const useWordEntry = ({word}: UseWordEntryProps) => {
 
     const fetchWordEntry = async () => {
       try {
-        const response = await axios.get(`/api/define?word=${word}`);
+        const response = await axios.get(`/api/dictionary/define?word=${word}`);
 
         if (word === latestWord.current) {
           setWordEntry(response.data);
