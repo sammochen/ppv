@@ -1,15 +1,23 @@
-import {AppBar, Grid, Toolbar, Typography} from '@mui/material';
+import {
+  AppBar,
+  Avatar,
+  Grid,
+  IconButton,
+  Toolbar,
+  Typography,
+} from '@mui/material';
 import {Box} from '@mui/system';
 import React from 'react';
 import {WordInput} from './components/WordInput';
 import {WordPanel} from './components/WordPanel';
+import {useAccount} from './hooks/useAccount';
 import {backgroundColor, secondaryColor, textColor} from './theme/colors';
 import {stubWordList} from './utils/stub';
 import {AuthoredWordEntry} from './utils/types';
 
-// const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
-
 export const App = () => {
+  const {account, switchAccount, getUserSetting} = useAccount();
+
   return (
     <Box sx={{backgroundColor: backgroundColor.hex(), minHeight: '100vh'}}>
       {/* Top app bar */}
@@ -22,6 +30,21 @@ export const App = () => {
           <Typography variant="h5" sx={{flexGrow: 1, color: textColor.hex()}}>
             ++vocabulary
           </Typography>
+
+          <IconButton
+            onClick={() => {
+              switchAccount();
+            }}
+          >
+            <Avatar
+              sx={{
+                bgcolor: getUserSetting().color.hex(),
+                fontWeight: 700,
+              }}
+            >
+              {getUserSetting().abbreviation}
+            </Avatar>
+          </IconButton>
         </Toolbar>
       </AppBar>
 
