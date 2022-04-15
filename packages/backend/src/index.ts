@@ -1,7 +1,8 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
-import {dictionaryRouter} from './routes';
+import {dictionaryRouter} from './routes/dictionary';
+import {wordBankRouter} from './routes/word-bank';
 
 const PORT = 4000;
 
@@ -21,6 +22,7 @@ const initExpress = () => {
   app.use(express.json());
 
   app.use('/api/dictionary', dictionaryRouter);
+  app.use('/api/word-bank', wordBankRouter);
 
   app.listen(PORT, () => {
     console.log(`🚀 Backend listening on port ${PORT}!`);

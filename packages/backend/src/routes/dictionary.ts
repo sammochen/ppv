@@ -3,7 +3,7 @@ import {FreeDictionary} from '../dictionary/free-dictionary';
 
 export const dictionaryRouter = express();
 
-dictionaryRouter.get('/define', async (req, res) => {
+dictionaryRouter.get('/word-entry', async (req, res) => {
   const {query} = req;
   const {word} = query;
   console.log(`📖 Defining: ${word}`);
