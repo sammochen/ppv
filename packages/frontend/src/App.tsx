@@ -11,12 +11,13 @@ import React from 'react';
 import {WordInput} from './components/WordInput';
 import {WordPanel} from './components/WordPanel';
 import {useAccount} from './hooks/useAccount';
+import {useWordBank} from './hooks/useWordBank';
 import {backgroundColor, secondaryColor, textColor} from './theme/colors';
-import {stubWordList} from './utils/stub';
-import {AuthoredWordEntry} from './utils/types';
+import {AuthoredWordEntry, WordEntry} from './utils/types';
 
 export const App = () => {
-  const {account, switchAccount, getUserSetting} = useAccount();
+  const {switchAccount, getUserSetting} = useAccount();
+  const {wordList, addAuthoredWordEntry} = useWordBank();
 
   return (
     <Box sx={{backgroundColor: backgroundColor.hex(), minHeight: '100vh'}}>
@@ -62,12 +63,17 @@ export const App = () => {
           >
             <Grid item xs={12}>
               <WordInput
-                onSubmitWord={(word: string) => {
-                  console.log('please submit this word', word);
+                onSubmitWordEntry={(wordEntry: WordEntry) => {
+                  const authoredWordEntry: AuthoredWordEntry = {
+                    author: getUserSetting().name,
+                    createTime: new Date().getTime(),
+                    wordEntry: wordEntry,
+                  };
+                  addAuthoredWordEntry(authoredWordEntry);
                 }}
               />
             </Grid>
-            {stubWordList.map((authoredWordEntry: AuthoredWordEntry, index) => {
+            {wordList.map((authoredWordEntry: AuthoredWordEntry, index) => {
               return (
                 <Grid item xs={12} key={index}>
                   <WordPanel authoredWordEntry={authoredWordEntry} />

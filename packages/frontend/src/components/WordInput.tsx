@@ -17,6 +17,7 @@ import {
   textColor,
 } from '../theme/colors';
 import {titleFontSize, titleFontWeight} from '../theme/sizes';
+import {WordEntry} from '../utils/types';
 import {MeaningRect} from './MeaningRect';
 
 const StyledTextField = styled(TextField)({
@@ -56,15 +57,18 @@ const StyledButton = styled(Button)({
 });
 
 export type WordInputProps = {
-  onSubmitWord: (word: string) => void;
+  onSubmitWordEntry: (wordEntry: WordEntry) => void;
 };
-export const WordInput = ({onSubmitWord}: WordInputProps) => {
+export const WordInput = ({onSubmitWordEntry}: WordInputProps) => {
   const [textValue, setTextValue] = useState('');
   const {loading, wordEntry} = useWordEntry({word: textValue});
 
   const submit = () => {
     // submit only works if the word is valid
-    if (wordEntry) onSubmitWord(textValue);
+    if (wordEntry) {
+      onSubmitWordEntry(wordEntry);
+      setTextValue('');
+    }
   };
 
   const handleTextFieldChange = (
@@ -106,6 +110,7 @@ export const WordInput = ({onSubmitWord}: WordInputProps) => {
             fullWidth
             sx={{height: '100%'}}
             disabled={loading === true || wordEntry === null}
+            onClick={submit}
           >
             <SaveIcon />
           </StyledButton>

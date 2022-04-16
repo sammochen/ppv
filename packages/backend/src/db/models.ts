@@ -25,7 +25,7 @@ export const WordEntryModel = model<WordEntry>('WordEntry', wordEntrySchema);
 export const authoredWordEntrySchema = new Schema<AuthoredWordEntry>({
   wordEntry: {type: wordEntrySchema, required: true},
   author: {type: String, required: true},
-  date: {type: Date, required: true},
+  createTime: {type: Number, required: true},
 });
 
 export const AuthoredWordEntryModel = model<AuthoredWordEntry>(

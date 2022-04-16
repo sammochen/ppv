@@ -15,8 +15,6 @@ wordBankRouter.post('/word', async (req, res) => {
   console.log(`🏦 POST /word`);
 
   const data: any = req.body;
-  console.log(req);
-  console.log(data);
   const {authoredWordEntry} = data;
 
   if (!authoredWordEntry) {
@@ -29,15 +27,3 @@ wordBankRouter.post('/word', async (req, res) => {
   await newDocument.save();
   res.sendStatus(201);
 });
-
-// // DELETE
-// wordBankRouter.delete('/word', async (req, res) => {
-//   console.log(`🏦 DELETE /word`);
-
-//   const params: any = req.params;
-//   const {word} = params;
-
-//   await AuthoredWordEntryModel.deleteMany({wordEntry: {word}});
-
-//   res.sendStatus(204);
-// });

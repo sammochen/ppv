@@ -49,7 +49,7 @@ describe('wordBankRouter', () => {
   it('POST', async () => {
     const authoredWordEntry: AuthoredWordEntry = {
       author: 'sam',
-      date: new Date(),
+      createTime: new Date().getTime(),
       wordEntry: {
         word: 'king',
         meanings: [

@@ -18,7 +18,9 @@ export type WordPanelProps = {
 };
 export const WordPanel = ({authoredWordEntry}: WordPanelProps) => {
   const {wordEntry} = authoredWordEntry;
-  const relativeDateString = dayjs().to(dayjs(authoredWordEntry.date));
+  const relativeDateString = dayjs().to(
+    dayjs(new Date(authoredWordEntry.createTime))
+  );
 
   return (
     <Paper

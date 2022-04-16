@@ -12,5 +12,5 @@ export interface WordEntry {
 export interface AuthoredWordEntry {
   wordEntry: WordEntry;
   author: string;
-  date: Date;
+  createTime: number; // millis since utc
 }
