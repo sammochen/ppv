@@ -7,7 +7,6 @@ import {
   Typography,
 } from '@mui/material';
 import {Box} from '@mui/system';
-import React from 'react';
 import {WordInput} from './components/WordInput';
 import {WordPanel} from './components/WordPanel';
 import {useAccount} from './hooks/useAccount';

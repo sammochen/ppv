@@ -8,7 +8,7 @@ import {
   Typography,
 } from '@mui/material';
 import {styled} from '@mui/material/styles';
-import {useState} from 'react';
+import {ChangeEvent, useState} from 'react';
 import {useWordEntry} from '../hooks/useWordEntry';
 import {
   backgroundColor,
@@ -72,7 +72,7 @@ export const WordInput = ({onSubmitWordEntry}: WordInputProps) => {
   };
 
   const handleTextFieldChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+    event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     setTextValue(event.target.value);
   };

@@ -1,7 +1,6 @@
 import {Card, Grid, Typography} from '@mui/material';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import React from 'react';
 import {secondaryTextColor, textColor} from '../theme/colors';
 import {definitionFontSize} from '../theme/sizes';
 import {WordMeaning} from '../utils/types';
