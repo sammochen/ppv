@@ -4,7 +4,6 @@
   "description": "ppv/backend",
   "main": "./src/index.ts",
   "scripts": {
-    "dev-start": "npx nodemon ./src/index.ts",
     "start": "ts-node ./src/index.ts"
   },
   "keywords": [],
@@ -23,7 +22,6 @@
     "jest": "^27.5.1",
     "mongodb-memory-server": "^8.2.0",
     "mongoose": "^6.1.8",
-    "nodemon": "^2.0.15",
     "prettier-plugin-organize-imports": "^2.3.4",
     "ts-jest": "^27.1.4",
     "ts-node": "^10.7.0",
