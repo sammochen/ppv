@@ -1,3 +1,8 @@
 # ppv: plus plus vocabulary
 
-Learning vocabulary, but social
+## Features
+
+- [ ] Proper user accounts
+- [ ] Edit/Delete entries
+- [ ] Unseen words
+- [ ] Choose top definition

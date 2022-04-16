@@ -2,18 +2,9 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "gts": "^3.1.0",
-    "lerna": "^4.0.0",
-    "pre-commit": "^1.2.2",
-    "prettier-plugin-organize-imports": "^2.3.4",
-    "typescript": "^4.0.3"
+    "lerna": "^4.0.0"
   },
   "scripts": {
-    "lint-check": "eslint --no-error-on-unmatched-pattern --cache --max-warnings=0 ./packages/**/src/**/*.{ts,tsx,js,jsx}",
-    "prettier-write": "prettier --write --no-error-on-unmatched-pattern ./packages/**/src/**/*.{ts,tsx,js,jsx}"
-  },
-  "pre-commit": [
-    "prettier-write",
-    "lint-check"
-  ]
+    "start": "lerna run start --stream"
+  }
 }
