@@ -2,9 +2,11 @@
   "name": "backend",
   "version": "0.0.0",
   "description": "ppv/backend",
-  "main": "./src/index.ts",
+  "main": "./build/src/index.js",
   "scripts": {
-    "start": "ts-node ./src/index.ts"
+    "dev": "ts-node ./src/index.ts",
+    "start": "node .",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",

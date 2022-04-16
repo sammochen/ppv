@@ -1,10 +1,11 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
+import path from 'path';
 import {dictionaryRouter} from './routes/dictionary';
 import {wordBankRouter} from './routes/word-bank';
 
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 const initMongoDB = async () => {
   const MONGODB_USERNAME = process.env['MONGODB_USERNAME'];
@@ -21,8 +22,16 @@ const initExpress = () => {
   const app = express();
   app.use(express.json());
 
+  // routes
   app.use('/api/dictionary', dictionaryRouter);
   app.use('/api/word-bank', wordBankRouter);
+
+  // frontend
+  console.log('🔗 Linking to frontend...');
+  const buildPath = path.join(__dirname, '/../../../frontend/build');
+  const indexPath = path.join(buildPath, 'index.html');
+  app.use(express.static(buildPath));
+  app.get('*', (req, res) => res.sendFile(indexPath));
 
   app.listen(PORT, () => {
     console.log(`🚀 Backend listening on port ${PORT}!`);
@@ -30,6 +39,9 @@ const initExpress = () => {
 };
 
 const main = () => {
+  console.log('🔧 Building backend...');
+  console.log('🗂 dirname: ', __dirname);
+
   // envs
   dotenv.config();
   // express
